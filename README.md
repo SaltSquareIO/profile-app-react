@@ -8,13 +8,16 @@ This is an intern practice project.
 
 ```bash
 npm install
+```
 
 ## Build the Project
 
 ```bash
 npm run build
+```
 
 ## Run the Project
 
 ```bash
 npm start
+```
