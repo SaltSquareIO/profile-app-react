@@ -20,6 +20,27 @@ npm run build
 npm start
 ```
 
+## Running the App with Docker
+
+To run the app using Docker, follow these steps:
+
+1. ### Build and Run the Docker Container:
+   In the root of the project, use the following command to build and start the container:
+
+   ```bash
+   docker compose up --build
+   ```
+
+2. ### Access the App:
+   Open your browser and navigate to [Local App](http://localhost:3000) to see the application running.
+
+3. ### Stop the Docker Container:
+   When you want to stop the app, use the following command:
+
+   ```bash
+   docker compose down
+   ```
+
 ## How to submit code
 
 - Each ticket should be worked on in a separate branch.
@@ -33,3 +54,6 @@ npm start
 
 As your work goes through each step, it's important to keep track of which status your ticket has on the Scrum management tool the team uses.
 Only after all of this is done, you will move the ticket to status "Done".
+
+
+
