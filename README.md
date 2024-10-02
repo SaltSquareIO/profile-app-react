@@ -29,7 +29,7 @@ npm start
 - The pull request should have a description of your changes and testing instructions. (Usually, there is a pull request template to help you out with this part.)
 - You then request a review from your colleagues and testing from QA.
 - After you receive both approvals, the PR can be merged.
-- When merging, merge by squashing all the commits (so only one commit will be made to _main_.)
+- When merging, merge by squashing all the commits (so only one commit will be made to _main_) and delete the branch.
 
 As your work goes through each step, it's important to keep track of which status your ticket has on the Scrum management tool the team uses.
 Only after all of this is done, you will move the ticket to status "Done".
