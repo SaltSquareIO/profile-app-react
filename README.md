@@ -20,6 +20,34 @@ npm run build
 npm start
 ```
 
+### Running the App with Docker
+
+To run the app using Docker, follow these steps:
+
+### 1. Build the Docker Image:
+   In the root of the project, use the following command to build the Docker image:
+
+```bash
+docker-compose build
+```
+
+### 2. Run the Docker Container:
+   After the image is built, you can start the container using the command:
+
+```bash
+docker-compose up
+```
+
+### 3. Access the App:
+   Open your browser and navigate to http://localhost:3000 to see the application running.
+
+### 4. Stop the Docker Container:
+   When you want to stop the app, use the following command:
+
+```bash
+docker compose down
+```
+
 ## How to submit code
 
 - Each ticket should be worked on in a separate branch.
