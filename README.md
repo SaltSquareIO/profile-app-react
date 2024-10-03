@@ -22,16 +22,20 @@ npm start
 
 ### Running the App with Docker
 
-To run the app using Docker, follow these steps:
+You can run the app using Docker for both development and production environments. Follow the instructions below.
 
-### 1. Build the Docker Image:
-   In the root of the project, use the following command to build the Docker image:
+### Running the App in Development Mode
+
+In development mode, the app will support live reloading, meaning that changes you make to the source code will be reflected immediately without needing to rebuild the container.
+
+### 1. Build the Docker Image for Development:
+   In the root of the project, use the following command to build the Docker image for development:
 
    ```bash
    docker-compose build
    ```
 
-### 2. Run the Docker Container:
+### 2. Run the Docker Container for Development:
    After the image is built, you can start the container using the command:
 
    ```bash
@@ -39,14 +43,48 @@ To run the app using Docker, follow these steps:
    ```
 
 ### 3. Access the App:
-   Open your browser and navigate to http://localhost:3000 to see the application running.
+   Open your browser and navigate to http://localhost:3000 to see the application running in development mode.
 
 ### 4. Stop the Docker Container:
-   When you want to stop the app, use the following command:
+   When you want to stop the app in development mode, use the following command:
 
    ```bash
    docker compose down
    ```
+
+### Running the App in Production Mode
+
+For production, we use a multi-stage Docker build to create an optimized version of the app that is served via Ngnix.
+
+### 1. Build the Docker Image for Production:
+   In the root od the project, use the following command to build the Docker image for production:
+
+```bash
+docker build -t sports-app-prod .
+```
+
+### 2. Run the Docker Container for Production:
+   Once the image is built, you can start the container using the following command:
+
+```bash
+docker run -d -p 80:80 sports-app-prod
+```
+
+### 3. Access the App:
+   Open your browser and navigate to http://localhost too see the production version of the application.
+
+### 4. Stop the Docker container: 
+   When you want to stop the production app, use the following command:
+
+```bash
+docker stop <container_id_or_name>
+```
+
+You can find the container ID or name by running the following command:
+
+```bash
+docker ps
+```
 
 ## How to submit code
 
