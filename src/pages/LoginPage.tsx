@@ -15,6 +15,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
   const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const handleClickShowPassword = () => {
@@ -28,9 +30,21 @@ const LoginPage: React.FC = () => {
       }, 0);
     }
   };
+
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    console.log('Email: ', email);
+    console.log('Password: ', password);
+
+    setEmail('');
+    setPassword('');
+  };
+
   return (
     <Box
       sx={{
@@ -53,37 +67,49 @@ const LoginPage: React.FC = () => {
         <Typography variant="h4" gutterBottom align="center" color="primary" sx={{ padding: 2 }}>
           Login
         </Typography>
-        <TextField
-          label="Email"
-          type="email"
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          color="primary"
-        />
-        <FormControl fullWidth variant="outlined" margin="normal">
-          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-password"
-            type={showPassword ? 'text' : 'password'}
-            inputRef={passwordInputRef}
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge="end">
-                  {showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
-            label="Password"
+        <Box
+          component="form"
+          onSubmit={handleLogin}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column'
+          }}>
+          <TextField
+            label="Email"
+            type="email"
+            margin="normal"
+            variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
           />
-        </FormControl>
-        <Button variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>
-          Login
-        </Button>
+          <FormControl fullWidth variant="outlined" margin="normal">
+            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+            <OutlinedInput
+              id="outlined-adornment-password"
+              type={showPassword ? 'text' : 'password'}
+              value={password}
+              inputRef={passwordInputRef}
+              onChange={(e) => setPassword(e.target.value)}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge="end">
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
+              label="Password"
+              required
+            />
+          </FormControl>
+          <Button variant="contained" color="primary" sx={{ marginTop: 2 }} type="submit">
+            Login
+          </Button>
+        </Box>
       </Paper>
     </Box>
   );
