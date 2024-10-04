@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import {
   TextField,
   Button,
@@ -6,19 +6,31 @@ import {
   Paper,
   Typography,
   IconButton,
-  InputAdornment
+  InputAdornment,
+  InputLabel,
+  OutlinedInput,
+  FormControl
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
-  const handleClickShowPassword = () => setShowPassword((prev) => !prev);
-
+  const handleClickShowPassword = () => {
+    if (passwordInputRef.current) {
+      const cursorPosition = passwordInputRef.current.selectionStart;
+      setShowPassword((prev) => !prev);
+      setTimeout(() => {
+        if (passwordInputRef.current) {
+          passwordInputRef.current.setSelectionRange(cursorPosition!, cursorPosition!);
+        }
+      }, 0);
+    }
+  };
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
-
   return (
     <Box
       sx={{
@@ -49,28 +61,26 @@ const LoginPage: React.FC = () => {
           variant="outlined"
           color="primary"
         />
-        <TextField
-          label="Password"
-          type="password"
-          fullWidth
-          margin="normal"
-          variant="outlined"
-          color="primary"
-          slotProps={{
-            input: {
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton
-                    onClick={handleClickShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end">
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </IconButton>
-                </InputAdornment>
-              )
+        <FormControl fullWidth variant="outlined" margin="normal">
+          <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-password"
+            type={showPassword ? 'text' : 'password'}
+            inputRef={passwordInputRef}
+            endAdornment={
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge="end">
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
             }
-          }}
-        />
+            label="Password"
+          />
+        </FormControl>
         <Button variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>
           Login
         </Button>
