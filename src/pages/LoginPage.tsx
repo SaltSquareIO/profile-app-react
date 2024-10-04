@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextField, Button, Box, Typography, Container } from '@mui/material';
+import { TextField, Button, Box, Typography, Container, Paper } from '@mui/material';
 
 const LoginPage: React.FC = () => {
   return (
@@ -11,12 +11,32 @@ const LoginPage: React.FC = () => {
         alignItems="center"
         minHeight="100vh"
         padding={2}>
-        <Typography variant="h4" gutterBottom>
-          Login
-        </Typography>
-        <TextField label="Email" type="email" fullWidth />
-        <TextField label="Password" type="password" fullWidth />
-        <Button>Login</Button>
+        <Paper
+          elevation={3}
+          sx={{ padding: 4, width: '100%', backgroundColor: 'background.paper' }}>
+          <Typography variant="h4" gutterBottom align="center" color="primary">
+            Login
+          </Typography>
+          <TextField
+            label="Email"
+            type="email"
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            color="primary"
+          />
+          <TextField
+            label="Password"
+            type="password"
+            fullWidth
+            margin="normal"
+            variant="outlined"
+            color="primary"
+          />
+          <Button variant="contained" color="primary" fullWidth sx={{ marginTop: 2 }}>
+            Login
+          </Button>
+        </Paper>
       </Box>
     </Container>
   );
