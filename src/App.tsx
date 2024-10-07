@@ -1,14 +1,14 @@
 import React from 'react';
-import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
 import { ThemeProvider } from '@mui/material';
 import theme from './assets/styles/theme';
 
-const App: React.FC = () => {
+function App() {
   return (
     <ThemeProvider theme={theme}>
-      <LoginPage />
+      <RegistrationPage />
     </ThemeProvider>
   );
-};
+}
 
 export default App;
