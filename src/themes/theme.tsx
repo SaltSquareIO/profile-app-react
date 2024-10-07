@@ -1,18 +1,19 @@
 import { createTheme } from '@mui/material';
+import { Colors } from './Colors';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#16423C'
+      main: Colors.darkGreen
     },
     secondary: {
-      main: '#6A9C89'
+      main: Colors.green
     },
     background: {
-      paper: '#E9EFEC'
+      paper: Colors.gray
     },
     text: {
-      primary: '#16423C'
+      primary: Colors.darkGreen
     }
   }
 });
