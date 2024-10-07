@@ -1,14 +1,21 @@
 import React from 'react';
 import RegistrationPage from './pages/RegistrationPage';
 import { ThemeProvider } from '@mui/material';
-import theme from './assets/styles/theme';
+import theme from './themes/theme';
 
-function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <RegistrationPage />
-    </ThemeProvider>
-  );
-}
+const router = createBrowserRouter([
+  {
+    path: '/register',
+    element: (
+      <ThemeProvider theme={theme}>
+        <RegistrationPage />
+      </ThemeProvider>
+    )
+  }
+]);
+
+const App: React.FC = () => {
+  return <RouterProvider router={router} />;
+};
 
 export default App;
