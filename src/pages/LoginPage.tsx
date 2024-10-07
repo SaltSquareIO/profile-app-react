@@ -48,23 +48,29 @@ const LoginPage: React.FC = () => {
   return (
     <Box
       sx={{
-        height: '90vh',
+        height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: '45%'
+        marginLeft: '45vw'
       }}>
       <Paper
         elevation={3}
         sx={{
-          padding: 3,
-          width: 400,
-          height: 350,
-          margin: 'auto',
-          borderRadius: 2,
+          padding: '3rem',
+          width: '25rem',
+          margin: '2rem 2rem',
+          borderRadius: 3,
           boxShadow: '0px 4px 15px rgba(0, 0, 0, 0.3)'
         }}>
-        <Typography variant="h4" gutterBottom align="center" color="primary" sx={{ padding: 2 }}>
+        <Typography
+          variant="h4"
+          gutterBottom
+          align="center"
+          color="primary"
+          sx={{
+            fontSize: '2rem'
+          }}>
           Login
         </Typography>
         <Box
@@ -72,13 +78,16 @@ const LoginPage: React.FC = () => {
           onSubmit={handleLogin}
           sx={{
             display: 'flex',
-            flexDirection: 'column'
+            flexDirection: 'column',
+            width: '100%',
+            marginBottom: '2rem'
           }}>
           <TextField
             label="Email"
             type="email"
             margin="normal"
             variant="outlined"
+            fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -102,11 +111,12 @@ const LoginPage: React.FC = () => {
                   </IconButton>
                 </InputAdornment>
               }
+              fullWidth
               label="Password"
               required
             />
           </FormControl>
-          <Button variant="contained" color="primary" sx={{ marginTop: 2 }} type="submit">
+          <Button variant="contained" color="primary" sx={{ marginTop: '1rem' }} type="submit">
             Login
           </Button>
         </Box>
