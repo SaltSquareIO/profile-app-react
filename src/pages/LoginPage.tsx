@@ -86,7 +86,7 @@ const LoginPage: React.FC = () => {
             }}>
             <TextField
               label="Email"
-              type="email"
+              type="text"
               margin="normal"
               variant="outlined"
               fullWidth
