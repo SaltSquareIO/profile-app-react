@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import {
   TextField,
   Button,
@@ -17,7 +17,6 @@ const LoginPage: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
-  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -99,7 +98,6 @@ const LoginPage: React.FC = () => {
                 id="outlined-adornment-password"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
-                inputRef={passwordInputRef}
                 onChange={(e) => setPassword(e.target.value)}
                 endAdornment={
                   <InputAdornment position="end">
