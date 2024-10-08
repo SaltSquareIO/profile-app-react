@@ -1,7 +1,7 @@
 import React from 'react';
 import LoginPage from './pages/LoginPage';
 import { ThemeProvider } from '@mui/material';
-import theme from './themes/theme';
+import theme from './assets/styles/theme';
 
 const App: React.FC = () => {
   return (
