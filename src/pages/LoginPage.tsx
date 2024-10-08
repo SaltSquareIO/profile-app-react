@@ -84,6 +84,7 @@ const LoginPage: React.FC = () => {
               marginBottom: '2rem'
             }}>
             <TextField
+              id="email-input-field"
               label="Email"
               type="text"
               margin="normal"
@@ -95,7 +96,7 @@ const LoginPage: React.FC = () => {
             <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
               <OutlinedInput
-                id="outlined-adornment-password"
+                id="password-input-field"
                 type={showPassword ? 'text' : 'password'}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -106,7 +107,8 @@ const LoginPage: React.FC = () => {
                       onClick={handleClickShowPassword}
                       onMouseDown={handleMouseDownPassword}
                       onMouseUp={handleMouseUpPassword}
-                      edge="end">
+                      edge="end"
+                      id="password-visibility-button">
                       {showPassword ? <VisibilityOff /> : <Visibility />}
                     </IconButton>
                   </InputAdornment>
@@ -115,7 +117,12 @@ const LoginPage: React.FC = () => {
                 label="Password"
               />
             </FormControl>
-            <Button variant="contained" color="primary" sx={{ marginTop: '1rem' }} type="submit">
+            <Button
+              id="login-button"
+              variant="contained"
+              color="primary"
+              sx={{ marginTop: '1rem' }}
+              type="submit">
               Login
             </Button>
           </Box>
