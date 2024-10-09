@@ -1,7 +1,7 @@
 import React from 'react';
-import RegistrationPage from './pages/RegistrationPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
+import RegistrationPage from './pages/RegistrationPage';
 import RootLayout from './pages/Root';
 
 const router = createBrowserRouter([
