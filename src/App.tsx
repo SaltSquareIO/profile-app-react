@@ -1,17 +1,23 @@
 import React from 'react';
 import RegistrationPage from './pages/RegistrationPage';
-import { ThemeProvider } from '@mui/material';
-import theme from './assets/styles/theme';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import LoginPage from './pages/LoginPage';
+import RootLayout from './pages/Root';
 
 const router = createBrowserRouter([
   {
-    path: '/register',
-    element: (
-      <ThemeProvider theme={theme}>
-        <RegistrationPage />
-      </ThemeProvider>
-    )
+    path: '/',
+    element: <RootLayout />,
+    children: [
+      {
+        index: true,
+        element: <LoginPage />
+      },
+      {
+        path: '/register',
+        element: <RegistrationPage />
+      }
+    ]
   }
 ]);
 
