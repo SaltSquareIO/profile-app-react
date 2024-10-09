@@ -57,7 +57,6 @@ const Input: React.FC<{
     <TextField
       id={props.id}
       label={props.label}
-      type={props.type}
       margin="normal"
       variant="outlined"
       fullWidth
