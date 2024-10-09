@@ -13,7 +13,8 @@ const theme = createTheme({
       paper: Colors.gray
     },
     text: {
-      primary: Colors.darkGreen
+      primary: Colors.darkGreen,
+      secondary: Colors.black
     }
   }
 });

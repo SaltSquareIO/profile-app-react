@@ -1,5 +1,7 @@
 import React from 'react';
 import { Box, Paper, Typography, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Colors } from '../assets/styles/colors';
 
 const Form: React.FC<{
   title: string;
@@ -63,6 +65,25 @@ const Form: React.FC<{
               }}>
               {props.submitButton}
             </Button>
+          </Box>
+          <Box textAlign="center">
+            <Typography variant="body1" sx={{ color: Colors.black }}>
+              {props.title === 'Login' ? (
+                <>
+                  New user?{' '}
+                  <Link to="/register" style={{ textDecoration: 'none', color: Colors.green }}>
+                    Register here!
+                  </Link>
+                </>
+              ) : (
+                <>
+                  Already have an account?{' '}
+                  <Link to="/" style={{ textDecoration: 'none', color: Colors.green }}>
+                    Log in here!
+                  </Link>
+                </>
+              )}
+            </Typography>
           </Box>
         </Paper>
       </Box>
