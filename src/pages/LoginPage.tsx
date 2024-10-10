@@ -17,7 +17,7 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Form title="Login" onSubmit={handleLogin} submitButton="Login">
+    <Form title="Login" onSubmit={handleLogin} submitButtonText="Login">
       <Input id="email-input-field" label="Email" type="text" value={email} setValue={setEmail} />
       <Input
         id="password-input-field"

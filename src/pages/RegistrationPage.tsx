@@ -23,7 +23,7 @@ const RegistrationPage: React.FC = () => {
   };
 
   return (
-    <Form title="Registration" onSubmit={handleRegistration} submitButton="Register">
+    <Form title="Registration" onSubmit={handleRegistration} submitButtonText="Register">
       <Input
         id="first-name-input-field"
         label="First Name"

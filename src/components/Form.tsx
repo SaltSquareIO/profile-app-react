@@ -7,7 +7,7 @@ const Form: React.FC<{
   title: string;
   children: React.ReactNode;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-  submitButton: React.ReactNode;
+  submitButtonText: string;
 }> = (props) => {
   return (
     <Box
@@ -63,7 +63,7 @@ const Form: React.FC<{
               sx={{
                 marginTop: '1rem'
               }}>
-              {props.submitButton}
+              {props.submitButtonText}
             </Button>
           </Box>
           <Box textAlign="center">
