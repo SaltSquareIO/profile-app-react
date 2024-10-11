@@ -23,7 +23,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) =>
 
   return (
     <FormControl fullWidth variant="outlined" margin="normal">
-      <InputLabel htmlFor={id}>Password</InputLabel>
+      <InputLabel htmlFor={id} required={true}>
+        Password
+      </InputLabel>
       <OutlinedInput
         id={id}
         type={showPassword ? 'text' : 'password'}

@@ -17,6 +17,7 @@ const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
       fullWidth
       value={value}
       onChange={(e) => setValue(e.target.value)}
+      required
     />
   );
 };
