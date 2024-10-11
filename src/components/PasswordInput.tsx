@@ -30,6 +30,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) =>
         id={id}
         type={showPassword ? 'text' : 'password'}
         value={value}
+        required={true}
         onChange={(e) => setValue(e.target.value)}
         endAdornment={
           <InputAdornment position="end">
