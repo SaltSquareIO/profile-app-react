@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import Form from '../components/Form';
-import Input from '../components/Input';
+import EmailInput from '../components/EmailInput';
+import PasswordInput from '../components/PasswordInput';
+import NameInput from '../components/NameInput';
+import { Link } from 'react-router-dom';
+import { Colors } from '../assets/styles/colors';
 
 const RegistrationPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -23,29 +27,32 @@ const RegistrationPage: React.FC = () => {
   };
 
   return (
-    <Form title="Registration" onSubmit={handleRegistration} submitButtonText="Register">
-      <Input
+    <Form
+      title="Registration"
+      onSubmit={handleRegistration}
+      submitButtonText="Register"
+      navigationText={
+        <>
+          Already have an account?{' '}
+          <Link to="/" style={{ textDecoration: 'none', color: Colors.green }}>
+            Log in here!
+          </Link>
+        </>
+      }>
+      <NameInput
         id="first-name-input-field"
         label="First Name"
-        type="text"
         value={firstName}
         setValue={setFirstName}
       />
-      <Input
+      <NameInput
         id="last-name-input-field"
         label="Last Name"
-        type="text"
         value={lastName}
         setValue={setLastName}
       />
-      <Input id="email-input-field" label="Email" type="text" value={email} setValue={setEmail} />
-      <Input
-        id="password-input-field"
-        label="Password"
-        type="password"
-        value={password}
-        setValue={setPassword}
-      />
+      <EmailInput id="email-input-field" value={email} setValue={setEmail} />
+      <PasswordInput id="password-input-field" value={password} setValue={setPassword} />
     </Form>
   );
 };

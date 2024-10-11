@@ -1,21 +1,14 @@
 import React, { useState } from 'react';
-import {
-  TextField,
-  OutlinedInput,
-  InputAdornment,
-  IconButton,
-  FormControl,
-  InputLabel
-} from '@mui/material';
+import { OutlinedInput, InputAdornment, IconButton, FormControl, InputLabel } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
-const Input: React.FC<{
+interface PasswordInputProps {
   id: string;
-  label: string;
-  type: 'text' | 'password';
   value: string;
   setValue: (value: string) => void;
-}> = (props) => {
+}
+
+const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -28,14 +21,14 @@ const Input: React.FC<{
     event.preventDefault();
   };
 
-  return props.type === 'password' ? (
+  return (
     <FormControl fullWidth variant="outlined" margin="normal">
-      <InputLabel htmlFor={props.id}>{props.label}</InputLabel>
+      <InputLabel htmlFor={id}>Password</InputLabel>
       <OutlinedInput
-        id={props.id}
+        id={id}
         type={showPassword ? 'text' : 'password'}
-        value={props.value}
-        onChange={(e) => props.setValue(e.target.value)}
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -50,20 +43,10 @@ const Input: React.FC<{
           </InputAdornment>
         }
         fullWidth
-        label={props.label}
+        label="Password"
       />
     </FormControl>
-  ) : (
-    <TextField
-      id={props.id}
-      label={props.label}
-      margin="normal"
-      variant="outlined"
-      fullWidth
-      value={props.value}
-      onChange={(e) => props.setValue(e.target.value)}
-    />
   );
 };
 
-export default Input;
+export default PasswordInput;

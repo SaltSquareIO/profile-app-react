@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import Form from '../components/Form';
-import Input from '../components/Input';
+import EmailInput from '../components/EmailInput';
+import PasswordInput from '../components/PasswordInput';
+import { Link } from 'react-router-dom';
+import { Colors } from '../assets/styles/colors';
 
 const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -17,15 +20,20 @@ const LoginPage: React.FC = () => {
   };
 
   return (
-    <Form title="Login" onSubmit={handleLogin} submitButtonText="Login">
-      <Input id="email-input-field" label="Email" type="text" value={email} setValue={setEmail} />
-      <Input
-        id="password-input-field"
-        label="Password"
-        type="password"
-        value={password}
-        setValue={setPassword}
-      />
+    <Form
+      title="Login"
+      onSubmit={handleLogin}
+      submitButtonText="Login"
+      navigationText={
+        <>
+          New user?{' '}
+          <Link to="/register" style={{ textDecoration: 'none', color: Colors.green }}>
+            Register here!
+          </Link>
+        </>
+      }>
+      <EmailInput id="email-input-field" value={email} setValue={setEmail} />
+      <PasswordInput id="password-input-field" value={password} setValue={setPassword} />
     </Form>
   );
 };

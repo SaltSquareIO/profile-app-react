@@ -1,14 +1,22 @@
 import React from 'react';
 import { Box, Paper, Typography, Button } from '@mui/material';
-import { Link } from 'react-router-dom';
 import { Colors } from '../assets/styles/colors';
 
-const Form: React.FC<{
+interface FormProps {
   title: string;
   children: React.ReactNode;
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   submitButtonText: string;
-}> = (props) => {
+  navigationText?: React.ReactNode;
+}
+
+const Form: React.FC<FormProps> = ({
+  title,
+  children,
+  onSubmit,
+  submitButtonText,
+  navigationText
+}) => {
   return (
     <Box
       sx={{
@@ -43,18 +51,18 @@ const Form: React.FC<{
             sx={{
               fontSize: '2rem'
             }}>
-            {props.title}
+            {title}
           </Typography>
           <Box
             component="form"
-            onSubmit={props.onSubmit}
+            onSubmit={onSubmit}
             sx={{
               display: 'flex',
               flexDirection: 'column',
               width: '100%',
               marginBottom: '2rem'
             }}>
-            {props.children}
+            {children}
             <Button
               id="submit-button"
               type="submit"
@@ -63,28 +71,16 @@ const Form: React.FC<{
               sx={{
                 marginTop: '1rem'
               }}>
-              {props.submitButtonText}
+              {submitButtonText}
             </Button>
           </Box>
-          <Box textAlign="center">
-            <Typography variant="body1" sx={{ color: Colors.black }}>
-              {props.title === 'Login' ? (
-                <>
-                  New user?{' '}
-                  <Link to="/register" style={{ textDecoration: 'none', color: Colors.green }}>
-                    Register here!
-                  </Link>
-                </>
-              ) : (
-                <>
-                  Already have an account?{' '}
-                  <Link to="/" style={{ textDecoration: 'none', color: Colors.green }}>
-                    Log in here!
-                  </Link>
-                </>
-              )}
-            </Typography>
-          </Box>
+          {navigationText && (
+            <Box textAlign="center">
+              <Typography variant="body1" sx={{ color: Colors.black }}>
+                {navigationText}
+              </Typography>
+            </Box>
+          )}
         </Paper>
       </Box>
     </Box>
