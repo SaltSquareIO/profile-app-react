@@ -8,6 +8,10 @@ interface EmailInputProps {
 }
 
 const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   return (
     <TextField
       id={id}
@@ -16,7 +20,7 @@ const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
       variant="outlined"
       fullWidth
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={handleChange}
       required
     />
   );
