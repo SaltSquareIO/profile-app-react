@@ -1,5 +1,5 @@
 services:
-  sports-app-react-fe:
+  profile-app-react:
     build:
       context: .
       dockerfile: Dockerfile

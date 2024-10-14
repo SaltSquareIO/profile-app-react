@@ -13,7 +13,18 @@ const theme = createTheme({
       paper: Colors.gray
     },
     text: {
-      primary: Colors.darkGreen
+      primary: Colors.darkGreen,
+      secondary: Colors.black
+    }
+  },
+  components: {
+    MuiLink: {
+      styleOverrides: {
+        root: {
+          textDecoration: 'none',
+          color: Colors.green
+        }
+      }
     }
   }
 });
