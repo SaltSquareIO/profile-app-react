@@ -1,4 +1,4 @@
-# Sports App
+# Profile App
 
 This is an intern practice project. The goal is to create a basic React + Typescript app for the auth flow.
 
