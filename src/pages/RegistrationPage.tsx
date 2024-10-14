@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from '../components/Form';
 import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
@@ -11,6 +11,11 @@ const RegistrationPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
+  const [isFormValid, setIsFormValid] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsFormValid(email.trim() !== '' && password.trim() !== '');
+  }, [email, password]);
 
   const handleRegistration = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -30,6 +35,7 @@ const RegistrationPage: React.FC = () => {
     <Form
       title="Registration"
       onSubmit={handleRegistration}
+      isSubmitButtonDisabled={!isFormValid}
       submitButtonText="Register"
       navigationText={
         <>
