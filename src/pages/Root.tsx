@@ -6,9 +6,7 @@ import theme from '../assets/styles/theme';
 const RootLayout: React.FC = () => {
   return (
     <ThemeProvider theme={theme}>
-      <main>
-        <Outlet />
-      </main>
+      <Outlet />
     </ThemeProvider>
   );
 };

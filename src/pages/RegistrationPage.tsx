@@ -3,8 +3,8 @@ import Form from '../components/Form';
 import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
 import NameInput from '../components/NameInput';
-import { Link } from 'react-router-dom';
-import { Colors } from '../assets/styles/colors';
+import { Link as RouterLink } from 'react-router-dom';
+import { Link } from '@mui/material';
 
 const RegistrationPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
@@ -26,19 +26,21 @@ const RegistrationPage: React.FC = () => {
     setPassword('');
   };
 
+  const navigationText = (
+    <>
+      Already have an account?{' '}
+      <Link component={RouterLink} to="/">
+        Log in here!
+      </Link>
+    </>
+  );
+
   return (
     <Form
       title="Registration"
       onSubmit={handleRegistration}
       submitButtonText="Register"
-      navigationText={
-        <>
-          Already have an account?{' '}
-          <Link to="/" style={{ textDecoration: 'none', color: Colors.green }}>
-            Log in here!
-          </Link>
-        </>
-      }>
+      navigationText={navigationText}>
       <NameInput
         id="first-name-input-field"
         label="First Name"
