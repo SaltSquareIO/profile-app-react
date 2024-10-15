@@ -5,9 +5,10 @@ interface EmailInputProps {
   id: string;
   value: string;
   setValue: (value: string) => void;
+  error?: string | null;
 }
 
-const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
+const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue, error }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
   };
@@ -21,6 +22,8 @@ const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
       fullWidth
       value={value}
       onChange={handleChange}
+      error={!!error}
+      helperText={error}
       required
     />
   );

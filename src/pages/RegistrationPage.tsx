@@ -12,6 +12,12 @@ const RegistrationPage: React.FC = () => {
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
+  const [emailError, setEmailError] = useState<string | null>(null);
+
+  const validateEmail = (emailFormat: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(emailFormat);
+  };
 
   useEffect(() => {
     setIsFormValid(email.trim() !== '' && password.trim() !== '');
@@ -20,7 +26,15 @@ const RegistrationPage: React.FC = () => {
   const handleRegistration = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (isFormValid) {
+    setEmailError(null);
+    let hasError = false;
+
+    if (!validateEmail(email)) {
+      setEmailError('Invalid email address format.');
+      hasError = true;
+    }
+
+    if (!hasError) {
       console.log('First Name: ', firstName);
       console.log('Last Name: ', lastName);
       console.log('Email: ', email);
@@ -61,9 +75,10 @@ const RegistrationPage: React.FC = () => {
         value={lastName}
         setValue={setLastName}
       />
-      <EmailInput id="email-input-field" value={email} setValue={setEmail} />
+      <EmailInput id="email-input-field" value={email} setValue={setEmail} error={emailError} />
       <PasswordInput id="password-input-field" value={password} setValue={setPassword} />
     </Form>
   );
 };
+
 export default RegistrationPage;
