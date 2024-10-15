@@ -1,14 +1,22 @@
 import React, { useState } from 'react';
-import { OutlinedInput, InputAdornment, IconButton, FormControl, InputLabel } from '@mui/material';
+import {
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  InputLabel,
+  FormHelperText
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 interface PasswordInputProps {
   id: string;
   value: string;
   setValue: (value: string) => void;
+  error?: string | null;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue, error }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -23,7 +31,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) =>
 
   return (
     <FormControl fullWidth variant="outlined" margin="normal">
-      <InputLabel htmlFor={id} required={true}>
+      <InputLabel htmlFor={id} required={true} error={!!error}>
         Password
       </InputLabel>
       <OutlinedInput
@@ -47,7 +55,9 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) =>
         }
         fullWidth
         label="Password"
+        error={!!error}
       />
+      {error && <FormHelperText error={!!error}>{error}</FormHelperText>}
     </FormControl>
   );
 };

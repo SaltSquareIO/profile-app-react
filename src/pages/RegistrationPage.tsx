@@ -13,10 +13,17 @@ const RegistrationPage: React.FC = () => {
   const [lastName, setLastName] = useState<string>('');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
   const [emailError, setEmailError] = useState<string | null>(null);
+  const [passwordError, setPasswordError] = useState<string | null>(null);
 
   const validateEmail = (emailFormat: string): boolean => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(emailFormat);
+  };
+
+  const validatePassword = (passwordFormat: string): boolean => {
+    const passwordRegex =
+      /^(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]{6,100}$/;
+    return passwordRegex.test(passwordFormat);
   };
 
   useEffect(() => {
@@ -27,10 +34,18 @@ const RegistrationPage: React.FC = () => {
     event.preventDefault();
 
     setEmailError(null);
+    setPasswordError(null);
     let hasError = false;
 
     if (!validateEmail(email)) {
       setEmailError('Invalid email address format.');
+      hasError = true;
+    }
+
+    if (!validatePassword(password)) {
+      setPasswordError(
+        'Password must have between 6 and 100 characters, at least one uppercase letter, one digit and one special character.'
+      );
       hasError = true;
     }
 
@@ -76,7 +91,12 @@ const RegistrationPage: React.FC = () => {
         setValue={setLastName}
       />
       <EmailInput id="email-input-field" value={email} setValue={setEmail} error={emailError} />
-      <PasswordInput id="password-input-field" value={password} setValue={setPassword} />
+      <PasswordInput
+        id="password-input-field"
+        value={password}
+        setValue={setPassword}
+        error={passwordError}
+      />
     </Form>
   );
 };
