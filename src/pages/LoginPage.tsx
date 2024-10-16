@@ -35,7 +35,12 @@ const LoginPage: React.FC = () => {
       submitButtonText="Login"
       navigationText={navigationText}>
       <EmailInput id="email-input-field" value={email} setValue={setEmail} />
-      <PasswordInput id="password-input-field" value={password} setValue={setPassword} />
+      <PasswordInput
+        id="password-input-field"
+        value={password}
+        label="Password"
+        setValue={setPassword}
+      />
     </Form>
   );
 };

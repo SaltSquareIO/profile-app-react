@@ -12,11 +12,12 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 interface PasswordInputProps {
   id: string;
   value: string;
+  label: string;
   setValue: (value: string) => void;
   error?: string | null;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue, error }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, label, setValue, error }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -32,7 +33,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue, erro
   return (
     <FormControl fullWidth variant="outlined" margin="normal">
       <InputLabel htmlFor={id} required={true} error={!!error}>
-        Password
+        {label}
       </InputLabel>
       <OutlinedInput
         id={id}
@@ -54,7 +55,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue, erro
           </InputAdornment>
         }
         fullWidth
-        label="Password"
+        label={label}
         error={!!error}
       />
       {error && <FormHelperText error={!!error}>{error}</FormHelperText>}

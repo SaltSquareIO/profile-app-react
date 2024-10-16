@@ -5,47 +5,40 @@ import PasswordInput from '../components/PasswordInput';
 import NameInput from '../components/NameInput';
 import { Link as RouterLink } from 'react-router-dom';
 import { Link } from '@mui/material';
+import { usePasswordValidation } from '../hooks/usePasswordValidation';
+import { useEmailValidation } from '../hooks/useEmailValidation';
 
 const RegistrationPage: React.FC = () => {
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
-  const [emailError, setEmailError] = useState<string | null>(null);
-  const [passwordError, setPasswordError] = useState<string | null>(null);
 
-  const validateEmail = (emailFormat: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(emailFormat);
-  };
+  const { email, setEmail, emailError, validateEmail } = useEmailValidation();
 
-  const validatePassword = (passwordFormat: string): boolean => {
-    const passwordRegex =
-      /^(?=.*[A-Z])(?=.*\d)(?=.*[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~])[A-Za-z\d !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]{6,100}$/;
-    return passwordRegex.test(passwordFormat);
-  };
+  const {
+    password,
+    confirmPassword,
+    setPassword,
+    setConfirmPassword,
+    passwordError,
+    confirmPasswordError,
+    validatePassword
+  } = usePasswordValidation();
 
   useEffect(() => {
-    setIsFormValid(email.trim() !== '' && password.trim() !== '');
-  }, [email, password]);
+    setIsFormValid(email.trim() !== '' && password.trim() !== '' && confirmPassword.trim() !== '');
+  }, [email, password, confirmPassword]);
 
   const handleRegistration = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    setEmailError(null);
-    setPasswordError(null);
     let hasError = false;
 
-    if (!validateEmail(email)) {
-      setEmailError('Invalid email address format.');
+    if (!validateEmail()) {
       hasError = true;
     }
 
-    if (!validatePassword(password)) {
-      setPasswordError(
-        'Password must have between 6 and 100 characters, at least one uppercase letter, one digit and one special character.'
-      );
+    if (!validatePassword()) {
       hasError = true;
     }
 
@@ -59,6 +52,7 @@ const RegistrationPage: React.FC = () => {
       setLastName('');
       setEmail('');
       setPassword('');
+      setConfirmPassword('');
     }
   };
 
@@ -94,8 +88,16 @@ const RegistrationPage: React.FC = () => {
       <PasswordInput
         id="password-input-field"
         value={password}
+        label="Password"
         setValue={setPassword}
         error={passwordError}
+      />
+      <PasswordInput
+        id="confirm-password-input-field"
+        value={confirmPassword}
+        label="Confirm"
+        setValue={setConfirmPassword}
+        error={confirmPasswordError}
       />
     </Form>
   );
