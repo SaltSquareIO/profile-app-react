@@ -33,16 +33,32 @@ const RegistrationPage: React.FC = () => {
   const handleRegistration = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log('First Name: ', firstName);
-    console.log('Last Name: ', lastName);
-    console.log('Email: ', email);
-    console.log('Password: ', password);
+    let hasError = false;
 
-    setFirstName('');
-    setLastName('');
-    setEmail('');
-    setPassword('');
-    setConfirmPassword('');
+    if (emailError) {
+      hasError = true;
+    }
+
+    if (passwordError) {
+      hasError = true;
+    }
+
+    if (confirmPasswordError) {
+      hasError = true;
+    }
+
+    if (!hasError) {
+      console.log('First Name: ', firstName);
+      console.log('Last Name: ', lastName);
+      console.log('Email: ', email);
+      console.log('Password: ', password);
+
+      setFirstName('');
+      setLastName('');
+      setEmail('');
+      setPassword('');
+      setConfirmPassword('');
+    }
   };
 
   const navigationText = (
