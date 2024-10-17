@@ -44,5 +44,4 @@ const LoginPage: React.FC = () => {
     </Form>
   );
 };
-
 export default LoginPage;
