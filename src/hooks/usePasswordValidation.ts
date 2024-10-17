@@ -8,7 +8,6 @@ interface PasswordValidationProps {
   passwordError: string | null;
   confirmPasswordError: string | null;
   handlePasswordBlur: () => void;
-  handleConfirmPasswordBlur: () => void;
 }
 
 export const usePasswordValidation = (): PasswordValidationProps => {
@@ -24,16 +23,15 @@ export const usePasswordValidation = (): PasswordValidationProps => {
   };
 
   const handlePasswordBlur = () => {
-    if (!validatePasswordFormat(password)) {
+    if (!validatePasswordFormat(password) && password.trim() !== '') {
       setPasswordError(
         'Password must have between 6 and 100 characters, at least one uppercase letter, one digit and one special character.'
       );
     } else {
       setPasswordError(null);
     }
-  };
-  const handleConfirmPasswordBlur = () => {
-    if (password !== confirmPassword) {
+
+    if (password !== confirmPassword && confirmPassword.trim() !== '') {
       setConfirmPasswordError('Passwords do not match');
     } else {
       setConfirmPasswordError(null);
@@ -47,7 +45,6 @@ export const usePasswordValidation = (): PasswordValidationProps => {
     setConfirmPassword,
     passwordError,
     confirmPasswordError,
-    handlePasswordBlur,
-    handleConfirmPasswordBlur
+    handlePasswordBlur
   };
 };

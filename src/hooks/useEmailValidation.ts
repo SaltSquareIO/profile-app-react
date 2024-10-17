@@ -17,7 +17,7 @@ export const useEmailValidation = (): EmailValidationProps => {
   };
 
   const handleEmailBlur = () => {
-    if (!validateEmailFormat(email)) {
+    if (!validateEmailFormat(email) && email.trim() !== '') {
       setEmailError('Invalid email address format.');
     } else {
       setEmailError(null);

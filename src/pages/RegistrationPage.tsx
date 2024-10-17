@@ -22,8 +22,7 @@ const RegistrationPage: React.FC = () => {
     setConfirmPassword,
     passwordError,
     confirmPasswordError,
-    handlePasswordBlur,
-    handleConfirmPasswordBlur
+    handlePasswordBlur
   } = usePasswordValidation();
 
   useEffect(() => {
@@ -102,7 +101,7 @@ const RegistrationPage: React.FC = () => {
         label="Confirm"
         setValue={setConfirmPassword}
         error={confirmPasswordError}
-        onBlur={handleConfirmPasswordBlur}
+        onBlur={handlePasswordBlur}
       />
     </Form>
   );
