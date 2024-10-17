@@ -15,9 +15,17 @@ interface PasswordInputProps {
   label: string;
   setValue: (value: string) => void;
   error?: string | null;
+  onBlur?: () => void;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, label, setValue, error }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  id,
+  value,
+  label,
+  setValue,
+  error,
+  onBlur
+}) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -41,6 +49,7 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, label, setValu
         value={value}
         required={true}
         onChange={(e) => setValue(e.target.value)}
+        onBlur={onBlur}
         endAdornment={
           <InputAdornment position="end">
             <IconButton

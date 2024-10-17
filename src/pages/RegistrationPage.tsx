@@ -22,7 +22,8 @@ const RegistrationPage: React.FC = () => {
     setConfirmPassword,
     passwordError,
     confirmPasswordError,
-    validatePassword
+    handlePasswordBlur,
+    handleConfirmPasswordBlur
   } = usePasswordValidation();
 
   useEffect(() => {
@@ -32,24 +33,16 @@ const RegistrationPage: React.FC = () => {
   const handleRegistration = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    let hasError = false;
+    console.log('First Name: ', firstName);
+    console.log('Last Name: ', lastName);
+    console.log('Email: ', email);
+    console.log('Password: ', password);
 
-    if (!validatePassword()) {
-      hasError = true;
-    }
-
-    if (!hasError) {
-      console.log('First Name: ', firstName);
-      console.log('Last Name: ', lastName);
-      console.log('Email: ', email);
-      console.log('Password: ', password);
-
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
-    }
+    setFirstName('');
+    setLastName('');
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
   };
 
   const navigationText = (
@@ -93,6 +86,7 @@ const RegistrationPage: React.FC = () => {
         label="Password"
         setValue={setPassword}
         error={passwordError}
+        onBlur={handlePasswordBlur}
       />
       <PasswordInput
         id="confirm-password-input-field"
@@ -100,6 +94,7 @@ const RegistrationPage: React.FC = () => {
         label="Confirm"
         setValue={setConfirmPassword}
         error={confirmPasswordError}
+        onBlur={handleConfirmPasswordBlur}
       />
     </Form>
   );

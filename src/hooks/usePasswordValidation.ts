@@ -7,7 +7,8 @@ interface PasswordValidationProps {
   setConfirmPassword: (confirmPassword: string) => void;
   passwordError: string | null;
   confirmPasswordError: string | null;
-  validatePassword: () => boolean;
+  handlePasswordBlur: () => void;
+  handleConfirmPasswordBlur: () => void;
 }
 
 export const usePasswordValidation = (): PasswordValidationProps => {
@@ -22,25 +23,21 @@ export const usePasswordValidation = (): PasswordValidationProps => {
     return passwordRegex.test(passwordFormat);
   };
 
-  const validatePassword = (): boolean => {
-    setPasswordError(null);
-    setConfirmPasswordError(null);
-
-    let isValid = true;
-
+  const handlePasswordBlur = () => {
     if (!validatePasswordFormat(password)) {
       setPasswordError(
         'Password must have between 6 and 100 characters, at least one uppercase letter, one digit and one special character.'
       );
-      isValid = false;
+    } else {
+      setPasswordError(null);
     }
-
+  };
+  const handleConfirmPasswordBlur = () => {
     if (password !== confirmPassword) {
-      setConfirmPasswordError('Passwords do not match.');
-      isValid = false;
+      setConfirmPasswordError('Passwords do not match');
+    } else {
+      setConfirmPasswordError(null);
     }
-
-    return isValid;
   };
 
   return {
@@ -50,6 +47,7 @@ export const usePasswordValidation = (): PasswordValidationProps => {
     setConfirmPassword,
     passwordError,
     confirmPasswordError,
-    validatePassword
+    handlePasswordBlur,
+    handleConfirmPasswordBlur
   };
 };
