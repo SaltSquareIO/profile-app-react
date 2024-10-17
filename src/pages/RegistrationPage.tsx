@@ -34,11 +34,7 @@ const RegistrationPage: React.FC = () => {
 
     let hasError = false;
 
-    if (!validateEmail()) {
-      hasError = true;
-    }
-
-    if (!validatePassword()) {
+    if (!validateEmail() || !validatePassword()) {
       hasError = true;
     }
 
