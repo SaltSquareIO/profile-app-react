@@ -5,9 +5,15 @@ interface EmailInputProps {
   id: string;
   value: string;
   setValue: (value: string) => void;
+  error?: string | null;
+  onBlur?: () => void;
 }
 
-const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
+const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue, error, onBlur }) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
   return (
     <TextField
       id={id}
@@ -16,7 +22,11 @@ const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue }) => {
       variant="outlined"
       fullWidth
       value={value}
-      onChange={(e) => setValue(e.target.value)}
+      onChange={handleChange}
+      onBlur={onBlur}
+      error={!!error}
+      helperText={error}
+      required
     />
   );
 };

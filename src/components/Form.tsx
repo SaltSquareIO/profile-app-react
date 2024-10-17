@@ -8,6 +8,7 @@ interface FormProps {
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   submitButtonText: string;
   navigationText?: React.ReactNode;
+  isSubmitButtonDisabled?: boolean;
 }
 
 const Form: React.FC<FormProps> = ({
@@ -15,7 +16,8 @@ const Form: React.FC<FormProps> = ({
   children,
   onSubmit,
   submitButtonText,
-  navigationText
+  navigationText,
+  isSubmitButtonDisabled = false
 }) => {
   return (
     <Box
@@ -68,6 +70,7 @@ const Form: React.FC<FormProps> = ({
               type="submit"
               variant="contained"
               color="primary"
+              disabled={isSubmitButtonDisabled}
               sx={{
                 marginTop: '1rem'
               }}>
