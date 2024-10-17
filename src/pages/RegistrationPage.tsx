@@ -35,15 +35,7 @@ const RegistrationPage: React.FC = () => {
 
     let hasError = false;
 
-    if (emailError) {
-      hasError = true;
-    }
-
-    if (passwordError) {
-      hasError = true;
-    }
-
-    if (confirmPasswordError) {
+    if (emailError || passwordError || confirmPasswordError) {
       hasError = true;
     }
 
