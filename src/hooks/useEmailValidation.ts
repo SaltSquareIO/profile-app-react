@@ -4,7 +4,7 @@ interface EmailValidationProps {
   email: string;
   setEmail: (email: string) => void;
   emailError: string | null;
-  validateEmail: () => boolean;
+  handleEmailBlur: () => void;
 }
 
 export const useEmailValidation = (): EmailValidationProps => {
@@ -16,21 +16,18 @@ export const useEmailValidation = (): EmailValidationProps => {
     return emailRegex.test(emailFormat);
   };
 
-  const validateEmail = (): boolean => {
-    setEmailError(null);
-
+  const handleEmailBlur = () => {
     if (!validateEmailFormat(email)) {
       setEmailError('Invalid email address format.');
-      return false;
+    } else {
+      setEmailError(null);
     }
-
-    return true;
   };
 
   return {
     email,
     setEmail,
     emailError,
-    validateEmail
+    handleEmailBlur
   };
 };

@@ -13,7 +13,7 @@ const RegistrationPage: React.FC = () => {
   const [lastName, setLastName] = useState<string>('');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
 
-  const { email, setEmail, emailError, validateEmail } = useEmailValidation();
+  const { email, setEmail, emailError, handleEmailBlur } = useEmailValidation();
 
   const {
     password,
@@ -33,10 +33,6 @@ const RegistrationPage: React.FC = () => {
     event.preventDefault();
 
     let hasError = false;
-
-    if (!validateEmail()) {
-      hasError = true;
-    }
 
     if (!validatePassword()) {
       hasError = true;
@@ -84,7 +80,13 @@ const RegistrationPage: React.FC = () => {
         value={lastName}
         setValue={setLastName}
       />
-      <EmailInput id="email-input-field" value={email} setValue={setEmail} error={emailError} />
+      <EmailInput
+        id="email-input-field"
+        value={email}
+        setValue={setEmail}
+        error={emailError}
+        onBlur={handleEmailBlur}
+      />
       <PasswordInput
         id="password-input-field"
         value={password}
