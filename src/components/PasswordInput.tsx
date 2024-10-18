@@ -1,14 +1,31 @@
 import React, { useState } from 'react';
-import { OutlinedInput, InputAdornment, IconButton, FormControl, InputLabel } from '@mui/material';
+import {
+  OutlinedInput,
+  InputAdornment,
+  IconButton,
+  FormControl,
+  InputLabel,
+  FormHelperText
+} from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 interface PasswordInputProps {
   id: string;
   value: string;
+  label: string;
   setValue: (value: string) => void;
+  error?: string | null;
+  onBlur?: () => void;
 }
 
-const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) => {
+const PasswordInput: React.FC<PasswordInputProps> = ({
+  id,
+  value,
+  label,
+  setValue,
+  error,
+  onBlur
+}) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -23,12 +40,16 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) =>
 
   return (
     <FormControl fullWidth variant="outlined" margin="normal">
-      <InputLabel htmlFor={id}>Password</InputLabel>
+      <InputLabel htmlFor={id} required={true} error={!!error}>
+        {label}
+      </InputLabel>
       <OutlinedInput
         id={id}
         type={showPassword ? 'text' : 'password'}
         value={value}
+        required={true}
         onChange={(e) => setValue(e.target.value)}
+        onBlur={onBlur}
         endAdornment={
           <InputAdornment position="end">
             <IconButton
@@ -43,8 +64,10 @@ const PasswordInput: React.FC<PasswordInputProps> = ({ id, value, setValue }) =>
           </InputAdornment>
         }
         fullWidth
-        label="Password"
+        label={label}
+        error={!!error}
       />
+      {error && <FormHelperText error={!!error}>{error}</FormHelperText>}
     </FormControl>
   );
 };
