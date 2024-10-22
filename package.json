@@ -68,5 +68,6 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "proxy": "https://apps-dev.saltsquare.io/sports-app-api"
 }
