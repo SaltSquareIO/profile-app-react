@@ -96,6 +96,10 @@ const RegistrationPage: React.FC = () => {
     setResetField(true);
   };
 
+  const clearFieldError = () => {
+    setEmailFieldError(null);
+  };
+
   const navigationText = (
     <>
       Already have an account?{' '}
@@ -131,6 +135,7 @@ const RegistrationPage: React.FC = () => {
           setValue={setEmail}
           error={emailFieldError ?? emailError}
           onBlur={handleEmailBlur}
+          clearFieldError={clearFieldError}
         />
         <PasswordInput
           id="password-input-field"
