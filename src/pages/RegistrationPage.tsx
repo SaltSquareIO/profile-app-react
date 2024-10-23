@@ -16,6 +16,7 @@ const RegistrationPage: React.FC = () => {
   const [emailFieldError, setEmailFieldError] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [resetField, setResetField] = useState<boolean>(false);
 
   const { email, setEmail, emailError, handleEmailBlur } = useEmailValidation();
 
@@ -31,7 +32,10 @@ const RegistrationPage: React.FC = () => {
 
   useEffect(() => {
     setIsFormValid(email.trim() !== '' && password.trim() !== '' && confirmPassword.trim() !== '');
-  }, [email, password, confirmPassword]);
+    if (resetField) {
+      setResetField(false);
+    }
+  }, [email, password, confirmPassword, resetField]);
 
   const handleRegistration = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -89,6 +93,7 @@ const RegistrationPage: React.FC = () => {
     setPassword('');
     setConfirmPassword('');
     setEmailFieldError(null);
+    setResetField(true);
   };
 
   const navigationText = (
@@ -134,6 +139,7 @@ const RegistrationPage: React.FC = () => {
           setValue={setPassword}
           error={passwordError}
           onBlur={handlePasswordBlur}
+          reset={resetField}
         />
         <PasswordInput
           id="confirm-password-input-field"
@@ -142,6 +148,7 @@ const RegistrationPage: React.FC = () => {
           setValue={setConfirmPassword}
           error={confirmPasswordError}
           onBlur={handlePasswordBlur}
+          reset={resetField}
         />
       </Form>
       <ErrorModal isOpen={isModalOpen} description={serverError} onClose={handleModalClose} />
