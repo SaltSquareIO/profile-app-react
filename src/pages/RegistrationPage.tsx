@@ -4,9 +4,10 @@ import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
 import NameInput from '../components/NameInput';
 import { Link as RouterLink } from 'react-router-dom';
-import { Link, Modal, Box, Typography, Button } from '@mui/material';
+import { Link } from '@mui/material';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { useEmailValidation } from '../hooks/useEmailValidation';
+import ErrorModal from '../components/ErrorModal';
 
 const RegistrationPage: React.FC = () => {
   const [firstName, setFirstName] = useState<string>('');
@@ -67,14 +68,14 @@ const RegistrationPage: React.FC = () => {
           if (response.status === 406) {
             setEmailFieldError('User with this email already exists.');
           } else {
-            setServerError('Something went wrong. Please try again.');
+            setServerError('Something went wrong, please try again!');
             setIsModalOpen(true);
           }
           console.error('Failed to register', errorData);
         }
       } catch (error) {
         console.error('An error occurred during registration', error);
-        setServerError('An unexpected error occurred. Please try again.');
+        setServerError('Something went wrong, please try again!');
         setIsModalOpen(true);
       }
     }
@@ -143,30 +144,7 @@ const RegistrationPage: React.FC = () => {
           onBlur={handlePasswordBlur}
         />
       </Form>
-      <Modal open={isModalOpen} onClose={handleModalClose}>
-        <Box
-          sx={{
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            width: 400,
-            backgroundColor: 'background.paper',
-            boxShadow: 24,
-            p: 4,
-            textAlign: 'center'
-          }}>
-          <Typography id="modal-title" variant="h6" component="h2">
-            Error
-          </Typography>
-          <Typography id="modal-description" sx={{ mt: 2 }}>
-            {serverError}
-          </Typography>
-          <Button onClick={handleModalClose} color="primary" sx={{ mt: 2 }}>
-            OK
-          </Button>
-        </Box>
-      </Modal>
+      <ErrorModal isOpen={isModalOpen} description={serverError} onClose={handleModalClose} />
     </>
   );
 };
