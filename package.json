@@ -69,5 +69,5 @@
       "prettier --write"
     ]
   },
-  "proxy": "https://apps-dev.saltsquare.io/sports-app-api"
+  "proxy": "http://localhost:8080/sports-app-api"
 }
