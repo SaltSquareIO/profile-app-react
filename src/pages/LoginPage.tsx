@@ -35,8 +35,8 @@ const LoginPage: React.FC = () => {
         console.error('Login failed: ', errorData);
       }
     } catch (error) {
-      console.error('An error occurred', error);
       setLoginError('Incorrect email or password.');
+      console.error('An error occurred', error);
     }
   };
 
