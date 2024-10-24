@@ -9,14 +9,32 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
-  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log('Email: ', email);
-    console.log('Password: ', password);
+    const requestBody = {
+      email,
+      password
+    };
 
-    setEmail('');
-    setPassword('');
+    try {
+      const response = await fetch('/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (response.ok) {
+        window.location.href = '/home';
+      } else {
+        const errorData = await response.json();
+        console.error('Login failed: ', errorData);
+      }
+    } catch (error) {
+      console.error('An error occurred', error);
+    }
   };
 
   const navigationText = (
