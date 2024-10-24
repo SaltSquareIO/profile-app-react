@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   OutlinedInput,
   InputAdornment,
@@ -16,6 +16,7 @@ interface PasswordInputProps {
   setValue: (value: string) => void;
   error?: string | null;
   onBlur?: () => void;
+  reset?: boolean;
 }
 
 const PasswordInput: React.FC<PasswordInputProps> = ({
@@ -24,7 +25,8 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   label,
   setValue,
   error,
-  onBlur
+  onBlur,
+  reset
 }) => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
 
@@ -37,6 +39,12 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
   const handleMouseUpPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
   };
+
+  useEffect(() => {
+    if (reset) {
+      setShowPassword(false);
+    }
+  }, [reset]);
 
   return (
     <FormControl fullWidth variant="outlined" margin="normal">
