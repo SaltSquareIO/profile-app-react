@@ -35,7 +35,7 @@ const RegistrationPage: React.FC = () => {
     if (resetField) {
       setResetField(false);
     }
-  }, [email, password, confirmPassword, resetField]);
+  }, [email, password, confirmPassword]);
 
   const handleRegistration = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -55,7 +55,6 @@ const RegistrationPage: React.FC = () => {
         gender: 'DECLINE_TO_IDENTIFY'
       };
       try {
-        console.log(requestBody);
         const response = await fetch('/auth/register', {
           method: 'POST',
           headers: {
