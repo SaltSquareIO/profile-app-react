@@ -35,7 +35,7 @@ const RegistrationPage: React.FC = () => {
     if (resetField) {
       setResetField(false);
     }
-  }, [email, password, confirmPassword]);
+  }, [email, password, confirmPassword, resetField]);
 
   const handleRegistration = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
