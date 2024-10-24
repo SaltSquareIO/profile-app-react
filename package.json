@@ -68,5 +68,6 @@
       "eslint --fix",
       "prettier --write"
     ]
-  }
+  },
+  "proxy": "http://localhost:8080/sports-app-api"
 }
