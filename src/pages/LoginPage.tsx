@@ -30,13 +30,10 @@ const LoginPage: React.FC = () => {
       if (response.ok) {
         window.location.href = '/home';
       } else {
-        const errorData = await response.json();
         setLoginError('Incorrect email or password.');
-        console.error('Login failed: ', errorData);
       }
     } catch (error) {
       setLoginError('Incorrect email or password.');
-      console.error('An error occurred', error);
     }
   };
 
