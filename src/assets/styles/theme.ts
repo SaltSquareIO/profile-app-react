@@ -25,6 +25,22 @@ const theme = createTheme({
           color: Colors.green
         }
       }
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          '&.appbar-button': {
+            color: 'primary.main',
+            fontSize: '1rem',
+            textTransform: 'none',
+            transition: 'color 0.3s',
+            '&:hover': {
+              color: Colors.beige,
+              backgroundColor: 'transparent'
+            }
+          }
+        }
+      }
     }
   }
 });
