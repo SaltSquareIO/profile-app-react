@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import Form from '../components/Form';
 import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Typography } from '@mui/material';
 
 const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginError, setLoginError] = useState<string | null>(null);
@@ -28,7 +30,7 @@ const LoginPage: React.FC = () => {
       });
 
       if (response.ok) {
-        window.location.href = '/home';
+        navigate('/home');
       } else {
         setLoginError('Incorrect email or password.');
       }
