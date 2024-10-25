@@ -1,10 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import homeBackground from '../assets/images/homeBackground.jpg';
-import { AppBar, Box, Button, Toolbar } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
-import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
+import { Box } from '@mui/material';
+import UserProfileTable from '../components/UserProfileTable';
+import CustomAppBar from '../components/CustomAppBar';
+
+interface UserProfileData {
+  email: string;
+  firstName: string;
+  lastName: string;
+}
 
 const ProfilePage: React.FC = () => {
+  const [userProfile, setUserProfile] = useState<UserProfileData | null>(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch('/user/me', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setUserProfile({
+            email: data.email,
+            firstName: data.firstName,
+            lastName: data.lastName
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching user: ', error);
+      }
+    };
+    fetchUser();
+  }, []);
+
   return (
     <Box
       sx={{
@@ -14,31 +46,17 @@ const ProfilePage: React.FC = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
-      <AppBar
-        position="fixed"
-        elevation={0}
+      <Box
         sx={{
-          backgroundColor: 'transparent',
-          boxShadow: 'none',
-          padding: '1rem',
-          top: 0,
-          right: 0
+          width: '100vw',
+          height: '80vh',
+          display: 'flex',
+          justifyContent: 'flex-end',
+          alignItems: 'center'
         }}>
-        <Toolbar
-          sx={{
-            display: 'flex',
-            justifyContent: 'flex-end'
-          }}>
-          <Button
-            component={RouterLink}
-            to="/home"
-            className="appbar-button"
-            variant="text"
-            startIcon={<HomeTwoToneIcon />}>
-            Home
-          </Button>
-        </Toolbar>
-      </AppBar>
+        <CustomAppBar />
+        {userProfile ? <UserProfileTable data={userProfile} /> : <div>Loading...</div>}
+      </Box>
     </Box>
   );
 };
