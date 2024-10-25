@@ -4,6 +4,7 @@ import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Typography } from '@mui/material';
+import { loginUser } from '../api/auth';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,13 +22,7 @@ const LoginPage: React.FC = () => {
     };
 
     try {
-      const response = await fetch('/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(requestBody)
-      });
+      const response = await loginUser(requestBody);
 
       if (response.ok) {
         navigate('/home');
