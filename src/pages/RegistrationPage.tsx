@@ -8,6 +8,7 @@ import { Link } from '@mui/material';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { useEmailValidation } from '../hooks/useEmailValidation';
 import ErrorModal from '../components/ErrorModal';
+import { registerUser } from '../api/auth';
 
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
@@ -53,13 +54,7 @@ const RegistrationPage: React.FC = () => {
         gender: 'DECLINE_TO_IDENTIFY'
       };
       try {
-        const response = await fetch('/auth/register', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(requestBody)
-        });
+        const response = await registerUser(requestBody);
 
         if (response.ok) {
           navigate('/home');
