@@ -27,7 +27,8 @@ const UserProfileTable: React.FC<UserProfileTableProps> = ({ data }) => {
         maxWidth: '40.625rem',
         margin: 'auto',
         borderRadius: '0.1875rem',
-        boxShadow: '0rem 0.25rem 0.9375rem rgba(0, 0, 0, 0.3)'
+        boxShadow: '0rem 0.25rem 0.9375rem rgba(0, 0, 0, 0.3)',
+        padding: '1.5rem'
       }}>
       <Typography variant="h6" align="center" sx={{ padding: '1rem', color: 'text.primary' }}>
         User Profile

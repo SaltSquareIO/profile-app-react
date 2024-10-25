@@ -19,7 +19,8 @@ const CustomAppBar: React.FC = () => {
       <Toolbar
         sx={{
           display: 'flex',
-          justifyContent: 'flex-end'
+          justifyContent: 'flex-end',
+          gap: '1rem'
         }}>
         <Button
           component={RouterLink}

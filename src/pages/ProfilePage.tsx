@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import homeBackground from '../assets/images/homeBackground.jpg';
-import { Box } from '@mui/material';
+import { Box, CircularProgress } from '@mui/material';
 import UserProfileTable from '../components/UserProfileTable';
 import CustomAppBar from '../components/CustomAppBar';
+import { fetchUserProfile } from '../api/user';
 
 interface UserProfileData {
   email: string;
@@ -16,19 +17,9 @@ const ProfilePage: React.FC = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await fetch('/user/me', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setUserProfile({
-            email: data.email,
-            firstName: data.firstName,
-            lastName: data.lastName
-          });
+        const profile = await fetchUserProfile();
+        if (profile) {
+          setUserProfile(profile);
         }
       } catch (error) {
         console.error('Error fetching user: ', error);
@@ -51,11 +42,11 @@ const ProfilePage: React.FC = () => {
           width: '100vw',
           height: '80vh',
           display: 'flex',
-          justifyContent: 'flex-end',
-          alignItems: 'center'
+          alignItems: 'center',
+          justifyContent: 'center'
         }}>
         <CustomAppBar />
-        {userProfile ? <UserProfileTable data={userProfile} /> : <div>Loading...</div>}
+        {userProfile ? <UserProfileTable data={userProfile} /> : <CircularProgress />}
       </Box>
     </Box>
   );
