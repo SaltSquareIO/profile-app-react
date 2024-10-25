@@ -66,18 +66,14 @@ const RegistrationPage: React.FC = () => {
         if (response.ok) {
           window.location.href = '/home';
         } else {
-          const errorData = await response.json();
-
           if (response.status === 406) {
             setEmailFieldError('User with this email already exists.');
           } else {
             setServerError('Something went wrong, please try again!');
             setIsModalOpen(true);
           }
-          console.error('Failed to register', errorData);
         }
       } catch (error) {
-        console.error('An error occurred during registration', error);
         setServerError('Something went wrong, please try again!');
         setIsModalOpen(true);
       }
