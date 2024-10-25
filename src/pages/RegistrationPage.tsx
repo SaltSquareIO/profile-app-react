@@ -3,13 +3,15 @@ import Form from '../components/Form';
 import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
 import NameInput from '../components/NameInput';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
 import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { useEmailValidation } from '../hooks/useEmailValidation';
 import ErrorModal from '../components/ErrorModal';
 
 const RegistrationPage: React.FC = () => {
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
   const [isFormValid, setIsFormValid] = useState<boolean>(false);
@@ -60,7 +62,7 @@ const RegistrationPage: React.FC = () => {
         });
 
         if (response.ok) {
-          window.location.href = '/home';
+          navigate('/home');
         } else {
           if (response.status === 406) {
             setEmailFieldError('User with this email already exists.');

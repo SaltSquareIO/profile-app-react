@@ -16,23 +16,23 @@ const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, description, onClose })
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 400,
+          width: '25rem',
           backgroundColor: 'background.paper',
           boxShadow: 24,
-          p: 4,
+          p: '2rem',
           textAlign: 'center'
         }}>
         <Typography id="modal-title" variant="h6" component="h2" sx={{ color: 'text.primary' }}>
           Error
         </Typography>
-        <Typography id="modal-description" sx={{ mt: 2, color: 'text.secondary' }}>
+        <Typography id="modal-description" sx={{ mt: '1rem', color: 'text.secondary' }}>
           {description}
         </Typography>
         <Button
           id="modal-ok-button"
           onClick={onClose}
           color="primary"
-          sx={{ mt: 2, color: 'text.primary' }}>
+          sx={{ mt: '1rem', color: 'text.primary' }}>
           OK
         </Button>
       </Box>
