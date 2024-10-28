@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Paper, Typography, Button } from '@mui/material';
 import { Colors } from '../assets/styles/colors';
+import background from '../assets/images/background.jpg';
 
 interface FormProps {
   title: string;
@@ -26,7 +27,10 @@ const Form: React.FC<FormProps> = ({
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        backgroundImage: `url(${background})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}>
       <Box
         sx={{
