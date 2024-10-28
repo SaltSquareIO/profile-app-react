@@ -7,11 +7,22 @@ interface EmailInputProps {
   setValue: (value: string) => void;
   error?: string | null;
   onBlur?: () => void;
+  clearFieldError?: () => void;
 }
 
-const EmailInput: React.FC<EmailInputProps> = ({ id, value, setValue, error, onBlur }) => {
+const EmailInput: React.FC<EmailInputProps> = ({
+  id,
+  value,
+  setValue,
+  error,
+  onBlur,
+  clearFieldError
+}) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
+    if (clearFieldError) {
+      clearFieldError();
+    }
   };
 
   return (
