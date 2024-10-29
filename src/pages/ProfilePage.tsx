@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import homeBackground from '../assets/images/homeBackground.jpg';
 import { Box } from '@mui/material';
 import UserProfileTable from '../components/UserProfileTable';
-import CustomAppBar from '../components/CustomAppBar';
 import { fetchUserProfile } from '../api/user';
 import ErrorPage from './ErrorPage';
+import PageLayout from '../components/PageLayout';
 
 interface UserProfileData {
   email: string;
@@ -37,15 +36,7 @@ const ProfilePage: React.FC = () => {
   }
 
   return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        backgroundImage: `url(${homeBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}>
-      <CustomAppBar />
+    <PageLayout>
       <Box
         sx={{
           width: '100vw',
@@ -56,7 +47,7 @@ const ProfilePage: React.FC = () => {
         }}>
         {userProfile && <UserProfileTable data={userProfile} />}
       </Box>
-    </Box>
+    </PageLayout>
   );
 };
 export default ProfilePage;
