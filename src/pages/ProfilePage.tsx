@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import homeBackground from '../assets/images/homeBackground.jpg';
-import { Box, CircularProgress } from '@mui/material';
+import { Box } from '@mui/material';
 import UserProfileTable from '../components/UserProfileTable';
 import CustomAppBar from '../components/CustomAppBar';
 import { fetchUserProfile } from '../api/user';
+import ErrorPage from './ErrorPage';
 
 interface UserProfileData {
   email: string;
@@ -13,20 +14,27 @@ interface UserProfileData {
 
 const ProfilePage: React.FC = () => {
   const [userProfile, setUserProfile] = useState<UserProfileData | null>(null);
+  const [hasError, setHasError] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
         const profile = await fetchUserProfile();
-        if (profile) {
+        if (!profile) {
+          setHasError(true);
+        } else {
           setUserProfile(profile);
         }
       } catch (error) {
-        console.error('Error fetching user: ', error);
+        setHasError(true);
       }
     };
     fetchUser();
   }, []);
+
+  if (hasError) {
+    return <ErrorPage />;
+  }
 
   return (
     <Box
@@ -37,6 +45,7 @@ const ProfilePage: React.FC = () => {
         backgroundSize: 'cover',
         backgroundPosition: 'center'
       }}>
+      <CustomAppBar />
       <Box
         sx={{
           width: '100vw',
@@ -45,8 +54,7 @@ const ProfilePage: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'center'
         }}>
-        <CustomAppBar />
-        {userProfile ? <UserProfileTable data={userProfile} /> : <CircularProgress />}
+        {userProfile && <UserProfileTable data={userProfile} />}
       </Box>
     </Box>
   );
