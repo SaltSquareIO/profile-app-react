@@ -23,13 +23,17 @@ const ErrorPage: React.FC = () => {
           borderRadius: '0.1875rem',
           boxShadow: '0rem 0.25rem 0.9375rem rgba(0, 0, 0, 0.3)'
         }}>
-        <Typography variant="h5" sx={{ padding: '1rem' }}>
+        <Typography variant="h5" sx={{ padding: '1rem', color: 'text.primary' }}>
           Error
         </Typography>
-        <Typography variant="body1">
+        <Typography variant="body1" sx={{ color: 'text.secondary' }}>
           An error occurred while loading the requested data. Please try again later.
         </Typography>
-        <Button variant="contained" onClick={() => navigate('/home')} sx={{ marginTop: '1.5rem' }}>
+        <Button
+          id="back-to-home-button"
+          variant="contained"
+          onClick={() => navigate('/home')}
+          sx={{ marginTop: '1.5rem' }}>
           Back to Home
         </Button>
       </Box>
