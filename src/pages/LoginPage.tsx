@@ -25,7 +25,7 @@ const LoginPage: React.FC = () => {
       const response = await loginUser(requestBody);
 
       if (response.ok) {
-        navigate('/home');
+        navigate('/');
       } else {
         setLoginError('Incorrect email or password.');
       }

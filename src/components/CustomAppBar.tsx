@@ -24,7 +24,7 @@ const CustomAppBar: React.FC = () => {
         }}>
         <Button
           component={RouterLink}
-          to="/home"
+          to="/"
           className="appbar-button"
           variant="text"
           startIcon={<HomeTwoToneIcon />}>
