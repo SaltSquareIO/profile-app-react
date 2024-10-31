@@ -27,7 +27,7 @@ export async function registerUser(data: RegistrationData): Promise<Response> {
     body: JSON.stringify(data)
   });
 }
-export async function refreshAccessToken(): Promise<boolean> {
+export async function verifyAuthentication(): Promise<boolean> {
   try {
     const response = await fetch('/auth/refresh', {
       method: 'POST',

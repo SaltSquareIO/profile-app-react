@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { refreshAccessToken } from '../api/auth';
+import { verifyAuthentication } from '../api/auth';
 
 const ProtectedRoute: React.FC = () => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
   useEffect(() => {
     const checkAuthentication = async () => {
-      const response = await refreshAccessToken();
+      const response = await verifyAuthentication();
       setIsAuthenticated(response);
     };
     checkAuthentication();
