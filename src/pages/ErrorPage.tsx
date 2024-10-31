@@ -32,7 +32,7 @@ const ErrorPage: React.FC = () => {
         <Button
           id="back-to-home-button"
           variant="contained"
-          onClick={() => navigate('/home')}
+          onClick={() => navigate('/')}
           sx={{ marginTop: '1.5rem' }}>
           Back to Home
         </Button>

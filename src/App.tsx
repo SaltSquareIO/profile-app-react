@@ -5,6 +5,7 @@ import RegistrationPage from './pages/RegistrationPage';
 import RootLayout from './pages/Root';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -12,8 +13,9 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-        index: true,
-        element: <HomePage />
+        path: '/',
+        element: <ProtectedRoute />,
+        children: [{ index: true, element: <HomePage /> }]
       },
       {
         path: '/register',
@@ -25,7 +27,8 @@ const router = createBrowserRouter([
       },
       {
         path: '/profile',
-        element: <ProfilePage />
+        element: <ProtectedRoute />,
+        children: [{ index: true, element: <ProfilePage /> }]
       }
     ]
   }

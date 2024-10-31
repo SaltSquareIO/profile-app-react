@@ -27,3 +27,16 @@ export async function registerUser(data: RegistrationData): Promise<Response> {
     body: JSON.stringify(data)
   });
 }
+export async function refreshAccessToken(): Promise<boolean> {
+  try {
+    const response = await fetch('/auth/refresh', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json'
+      }
+    });
+    return response.ok;
+  } catch (error) {
+    return false;
+  }
+}

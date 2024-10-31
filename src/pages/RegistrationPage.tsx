@@ -57,7 +57,7 @@ const RegistrationPage: React.FC = () => {
         const response = await registerUser(requestBody);
 
         if (response.ok) {
-          navigate('/home');
+          navigate('/');
         } else {
           if (response.status === 406) {
             setEmailFieldError('User with this email already exists.');
@@ -84,7 +84,7 @@ const RegistrationPage: React.FC = () => {
   const navigationText = (
     <>
       Already have an account?{' '}
-      <Link component={RouterLink} to="/">
+      <Link component={RouterLink} to="/login">
         Log in here!
       </Link>
     </>
