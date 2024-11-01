@@ -27,3 +27,11 @@ export async function registerUser(data: RegistrationData): Promise<Response> {
     body: JSON.stringify(data)
   });
 }
+export async function logoutUser(): Promise<Response> {
+  return fetch('/auth/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  });
+}

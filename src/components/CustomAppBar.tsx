@@ -1,11 +1,25 @@
 import { AppBar, Button, Toolbar } from '@mui/material';
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import React from 'react';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
 import LogoutIcon from '@mui/icons-material/Logout';
+import { logoutUser } from '../api/auth';
 
 const CustomAppBar: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      const response = await logoutUser();
+      if (response.ok) {
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('An error occurred during logout: ', error);
+    }
+  };
+
   return (
     <AppBar
       position="fixed"
@@ -39,8 +53,12 @@ const CustomAppBar: React.FC = () => {
           startIcon={<AccountCircleTwoToneIcon />}>
           User Profile
         </Button>
-        <Button className="appbar-button" variant="text" startIcon={<LogoutIcon />}>
-          Log Out
+        <Button
+          onClick={handleLogout}
+          className="appbar-button"
+          variant="text"
+          startIcon={<LogoutIcon />}>
+          Logout
         </Button>
       </Toolbar>
     </AppBar>
