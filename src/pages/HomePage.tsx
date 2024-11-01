@@ -1,18 +1,8 @@
 import React from 'react';
-import homeBackground from '../assets/images/homeBackground.jpg';
-import { Box } from '@mui/material';
+import PageLayout from '../components/PageLayout';
 
 const HomePage: React.FC = () => {
-  return (
-    <Box
-      sx={{
-        width: '100vw',
-        height: '100vh',
-        backgroundImage: `url(${homeBackground})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }}></Box>
-  );
+  return <PageLayout />;
 };
 
 export default HomePage;
