@@ -3,6 +3,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import HomeTwoToneIcon from '@mui/icons-material/HomeTwoTone';
 import React from 'react';
 import AccountCircleTwoToneIcon from '@mui/icons-material/AccountCircleTwoTone';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const CustomAppBar: React.FC = () => {
   return (
@@ -37,6 +38,9 @@ const CustomAppBar: React.FC = () => {
           variant="text"
           startIcon={<AccountCircleTwoToneIcon />}>
           User Profile
+        </Button>
+        <Button className="appbar-button" variant="text" startIcon={<LogoutIcon />}>
+          Log Out
         </Button>
       </Toolbar>
     </AppBar>
