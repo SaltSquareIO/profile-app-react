@@ -10,32 +10,34 @@ import ProtectedRoute from './components/ProtectedRoute';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <RootLayout />,
+    element: <ProtectedRoute />,
     children: [
       {
-        path: '/',
-        element: <ProtectedRoute />,
-        children: [{ index: true, element: <HomePage /> }]
-      },
-      {
-        path: '/register',
-        element: <RegistrationPage />
-      },
-      {
-        path: '/login',
-        element: <LoginPage />
+        index: true,
+        element: <HomePage />
       },
       {
         path: '/profile',
-        element: <ProtectedRoute />,
-        children: [{ index: true, element: <ProfilePage /> }]
+        element: <ProfilePage />
       }
     ]
+  },
+  {
+    path: '/login',
+    element: <LoginPage />
+  },
+  {
+    path: '/register',
+    element: <RegistrationPage />
   }
 ]);
 
 const App: React.FC = () => {
-  return <RouterProvider router={router} />;
+  return (
+    <RootLayout>
+      <RouterProvider router={router} />
+    </RootLayout>
+  );
 };
 
 export default App;

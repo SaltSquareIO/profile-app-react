@@ -1,14 +1,13 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import theme from '../assets/styles/theme';
 
-const RootLayout: React.FC = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Outlet />
-    </ThemeProvider>
-  );
+interface RootLayoutProps {
+  children: React.ReactNode;
+}
+
+const RootLayout: React.FC<RootLayoutProps> = ({ children }) => {
+  return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 
 export default RootLayout;
