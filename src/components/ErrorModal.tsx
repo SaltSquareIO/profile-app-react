@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography, Button, Modal } from '@mui/material';
+import ErrorIcon from '@mui/icons-material/Error';
 
 interface ErrorModalProps {
   isOpen: boolean;
@@ -23,7 +24,7 @@ const ErrorModal: React.FC<ErrorModalProps> = ({ isOpen, description, onClose })
           textAlign: 'center'
         }}>
         <Typography id="modal-title" variant="h6" component="h2" sx={{ color: 'text.primary' }}>
-          Error
+          <ErrorIcon sx={{ fontSize: '2rem' }} />
         </Typography>
         <Typography id="modal-description" sx={{ mt: '1rem', color: 'text.secondary' }}>
           {description}
