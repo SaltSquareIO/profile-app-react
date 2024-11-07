@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Form from '../components/Form';
 import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Typography } from '@mui/material';
 import { loginUser } from '../api/auth';
+import { fetchUserProfile } from '../api/user';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +13,20 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginError, setLoginError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuthentication = async () => {
+      try {
+        const userProfile = await fetchUserProfile();
+        if (userProfile) {
+          navigate('/');
+        }
+      } catch (error) {
+        console.error('Error checking authentication ', error);
+      }
+    };
+    checkAuthentication();
+  }, [navigate]);
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
