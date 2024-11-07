@@ -12,18 +12,21 @@ const CustomAppBar: React.FC = () => {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState<boolean>(false);
   const [errorDescription, setErrorDescription] = useState<string | null>(null);
 
+  const handleError = () => {
+    setErrorDescription('Something went wrong, please try again!');
+    setIsErrorModalOpen(true);
+  };
+
   const handleLogout = async () => {
     try {
       const response = await logoutUser();
       if (response.ok) {
         navigate('/login');
       } else {
-        setErrorDescription('Something went wrong, please try again!');
-        setIsErrorModalOpen(true);
+        handleError();
       }
     } catch (error) {
-      setErrorDescription('Something went wrong, please try again!');
-      setIsErrorModalOpen(true);
+      handleError();
     }
   };
 
