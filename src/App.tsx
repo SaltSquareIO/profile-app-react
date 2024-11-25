@@ -6,6 +6,7 @@ import RootLayout from './pages/Root';
 import HomePage from './pages/HomePage';
 import ProfilePage from './pages/ProfilePage';
 import ProtectedRoute from './components/ProtectedRoute';
+import { AuthProvider } from './contexts/AuthContext';
 
 const router = createBrowserRouter([
   {
@@ -34,9 +35,11 @@ const router = createBrowserRouter([
 
 const App: React.FC = () => {
   return (
-    <RootLayout>
-      <RouterProvider router={router} />
-    </RootLayout>
+    <AuthProvider>
+      <RootLayout>
+        <RouterProvider router={router} />
+      </RootLayout>
+    </AuthProvider>
   );
 };
 

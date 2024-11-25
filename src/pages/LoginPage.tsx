@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Form from '../components/Form';
 import EmailInput from '../components/EmailInput';
 import PasswordInput from '../components/PasswordInput';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Typography } from '@mui/material';
 import { loginUser } from '../api/auth';
-import { fetchUserProfile } from '../api/user';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -14,19 +14,11 @@ const LoginPage: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [loginError, setLoginError] = useState<string | null>(null);
 
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const userProfile = await fetchUserProfile();
-        if (userProfile) {
-          navigate('/');
-        }
-      } catch (error) {
-        console.error('Error checking authentication ', error);
-      }
-    };
-    checkAuthentication();
-  }, [navigate]);
+  const { isAuthenticated, login } = useAuth();
+
+  if (isAuthenticated) {
+    navigate('/');
+  }
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -40,6 +32,7 @@ const LoginPage: React.FC = () => {
       const response = await loginUser(requestBody);
 
       if (response.ok) {
+        login();
         navigate('/');
       } else {
         setLoginError('Incorrect email or password.');

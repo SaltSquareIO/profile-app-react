@@ -9,9 +9,11 @@ import { usePasswordValidation } from '../hooks/usePasswordValidation';
 import { useEmailValidation } from '../hooks/useEmailValidation';
 import ErrorModal from '../components/ErrorModal';
 import { registerUser } from '../api/auth';
+import { useAuth } from '../contexts/AuthContext';
 
 const RegistrationPage: React.FC = () => {
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -57,6 +59,7 @@ const RegistrationPage: React.FC = () => {
         const response = await registerUser(requestBody);
 
         if (response.ok) {
+          login();
           navigate('/');
         } else {
           if (response.status === 406) {

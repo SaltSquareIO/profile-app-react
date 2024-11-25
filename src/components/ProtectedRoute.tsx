@@ -1,24 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
-import { fetchUserProfile } from '../api/user';
+import { AuthContext } from '../contexts/AuthContext';
 
 const ProtectedRoute: React.FC = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null);
-  useEffect(() => {
-    const checkAuthentication = async () => {
-      try {
-        const userProfile = await fetchUserProfile();
-        if (userProfile === null) {
-          setIsAuthenticated(false);
-        } else {
-          setIsAuthenticated(true);
-        }
-      } catch {
-        setIsAuthenticated(true);
-      }
-    };
-    checkAuthentication();
-  }, []);
+  const { isAuthenticated } = useContext(AuthContext);
 
   if (isAuthenticated === null) return null;
 
