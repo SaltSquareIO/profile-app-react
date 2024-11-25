@@ -10,9 +10,11 @@ export async function fetchUserProfile(): Promise<UserProfileData | null> {
       'Content-Type': 'application/json'
     }
   });
-  if (response.ok) {
+  if (response.status === 401) {
+    return null;
+  } else if (response.ok) {
     return response.json();
   } else {
-    return null;
+    throw new Error('Failed to fetch user profile.');
   }
 }

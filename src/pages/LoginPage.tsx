@@ -5,6 +5,7 @@ import PasswordInput from '../components/PasswordInput';
 import { Link as RouterLink, useNavigate } from 'react-router-dom';
 import { Link, Typography } from '@mui/material';
 import { loginUser } from '../api/auth';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginPage: React.FC = () => {
   const navigate = useNavigate();
@@ -12,6 +13,12 @@ const LoginPage: React.FC = () => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [loginError, setLoginError] = useState<string | null>(null);
+
+  const { isAuthenticated, login } = useAuth();
+
+  if (isAuthenticated) {
+    navigate('/');
+  }
 
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -25,7 +32,8 @@ const LoginPage: React.FC = () => {
       const response = await loginUser(requestBody);
 
       if (response.ok) {
-        navigate('/home');
+        login();
+        navigate('/');
       } else {
         setLoginError('Incorrect email or password.');
       }
